@@ -1,17 +1,18 @@
 import Main from "~/components/Main";
 import Container from "~/components/Container";
 import Aside from "~/components/Aside";
+import PostTr from "~/components/PostTr";
 
-interface post {
+export interface post {
   title: string;
   published: boolean;
-  _id: string;
+  _id?: string;
   text: string;
-  timestamp: string;
+  timestamp?: string;
 }
 
 export default async function Posts() {
-  const res = await fetch("http://localhost:3000/posts");
+  const res = await fetch("http://localhost:3000/posts", { cache: "no-cache" });
   const posts: post[] = await res.json();
   console.log(posts[5]?.published);
   return (
@@ -27,11 +28,7 @@ export default async function Posts() {
         </thead>
         <tbody>
           {posts.map((post) => (
-            <tr className="text-center" key={post._id}>
-              <td>{post.title}</td>
-              <td>{post.timestamp}</td>
-              <td>{post.published === true ? `🟢` : `🔴`}</td>
-            </tr>
+            <PostTr key={post._id} post={post} />
           ))}
         </tbody>
       </table>
