@@ -5,6 +5,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
+  console.log(req.body.published);
   try {
     const apiResponse = await fetch(
       `http://172.233.16.85/posts/${req.query.postId}`,
