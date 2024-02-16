@@ -1,6 +1,3 @@
-import Main from "~/components/Main";
-import Container from "~/components/Container";
-import Aside from "~/components/Aside";
 import PostTr from "~/components/PostTr";
 
 export interface post {
@@ -12,9 +9,7 @@ export interface post {
 }
 
 export default async function Posts() {
-  const res = await fetch("http://localhost:3000/posts", { cache: "no-cache" });
-  const posts: post[] = await res.json();
-  console.log(posts[5]?.published);
+  const posts: post[] = await getPosts();
   return (
     <>
       <h1 className="text-5xl font-extrabold">Posts</h1>
@@ -27,23 +22,28 @@ export default async function Posts() {
           </tr>
         </thead>
         <tbody>
-          {posts.map((post) => (
-            <PostTr key={post._id} post={post} />
-          ))}
+          {posts ? (
+            posts.map((post) => <PostTr key={post._id} post={post} />)
+          ) : (
+            <p>no posts...</p>
+          )}
         </tbody>
       </table>
     </>
   );
 }
 
-async function getPosts() {
+async function getPosts(): Promise<post[]> {
   try {
-    const res = await fetch("http://localhost:3000/posts");
-    if (res.status === 200) {
-      const posts: post[] = await res.json();
-      return posts;
-    }
+    const res = await fetch("http://172.233.16.85/posts", {
+      cache: "no-cache",
+    });
+    if (!res.ok) throw new Error("Failed to fetched data");
+
+    const data: post[] = await res.json() as post[];
+    return data;
   } catch (err) {
     console.log(err);
+    throw err;
   }
 }

@@ -9,7 +9,8 @@ interface Props {
 export default function PostTr({ post }: Props) {
   const [published, setPublished] = useState(post.published);
   async function handleClick() {
-    await fetch(`http://localhost:3000/posts/${post._id}`, {
+    console.log("updating data base");
+    const response = await fetch(`http://172.233.16.85/posts/${post._id}`, {
       method: "PATCH",
       cache: "no-cache",
       headers: {
@@ -18,7 +19,8 @@ export default function PostTr({ post }: Props) {
       },
       body: JSON.stringify({ published: !published }),
     });
-    setPublished((p) => (p = !p));
+    console.log(response);
+    if (response.ok) setPublished((p) => (p = !p));
   }
   return (
     <tr className="" key={post._id}>
