@@ -10,7 +10,7 @@ export default function PostTr({ post }: Props) {
   const [published, setPublished] = useState(post.published);
   async function handleClick() {
     console.log("updating data base");
-    const response = await fetch(`http://172.233.16.85/posts/${post._id}`, {
+    const response = await fetch(`/api/posts/${post._id}`, {
       method: "PATCH",
       cache: "no-cache",
       headers: {
