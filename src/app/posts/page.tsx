@@ -18,7 +18,7 @@ export default async function Posts() {
           <tr className="text-lg font-extrabold">
             <th>Title</th>
             <th>Date</th>
-            <th>Published</th>
+            <th className="text-center">Published</th>
           </tr>
         </thead>
         <tbody>
