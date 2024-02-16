@@ -15,7 +15,7 @@ export default async function handler(
           accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: req.body.published,
+        body: JSON.stringify(req.body),
       },
     );
     if (!apiResponse.ok)
