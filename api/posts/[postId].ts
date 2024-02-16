@@ -16,7 +16,7 @@ export default async function handler(
           "Content-Type": "application/json",
         },
         body: JSON.stringify(req.body),
-        timeout: 10000
+        timeout: 10000,
       },
     );
     if (!apiResponse.ok)
