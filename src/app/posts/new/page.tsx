@@ -16,7 +16,7 @@ export default function NewPost() {
       text: text,
       published: published,
     };
-    const res = await fetch("/api/posts/new", {
+    const res = await fetch("/api/posts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
