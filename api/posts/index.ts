@@ -8,7 +8,7 @@ export default async function handler(
 ) {
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 10000);
+    const timeoutId = setTimeout(() => controller.abort(), 15000);
     if (req.method === "GET") {
       const apiResponse = await fetch("http://172.233.16.85/posts", {
         cache: "no-cache",
@@ -23,7 +23,7 @@ export default async function handler(
           "Content-Type": "application/json",
         },
         body: JSON.stringify(req.body),
-        signal: controller.signal
+        signal: controller.signal,
       });
       if (!apiResponse.ok) {
         throw new Error(`couldnt POST to the api`);
