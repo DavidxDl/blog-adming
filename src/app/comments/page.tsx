@@ -1,6 +1,6 @@
 interface comment {
   email: string;
-  text: string;
+  message: string;
   timestamp: string;
   id: string;
 }
@@ -13,7 +13,7 @@ export default async function Comments() {
         comments.map((c) => (
           <div key={c.id}>
             <h2>{c.email}</h2>
-            <p>{c.text}</p>
+            <p>{c.message}</p>
           </div>
         ))
       ) : (
@@ -25,8 +25,7 @@ export default async function Comments() {
 
 async function getComments(): Promise<comment[]> {
   try {
-    const res = await fetch("http://172.233.16.85/comments");
-    if (!res.ok) throw new Error("couldnt fetch comments");
+    const res = await fetch("http://172.233.16.85/posts/comments");
     const data: comment[] = (await res.json()) as comment[];
     return data;
   } catch (error) {
