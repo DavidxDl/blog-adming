@@ -29,7 +29,7 @@ export default async function handler(
         throw new Error(`couldnt POST to the api`);
       }
       clearTimeout(timeoutId);
-      res.status(200);
+      res.status(200).json({ success: true }); // Send a response indicating success
     }
   } catch (error) {
     console.error("Error fetching data from API:", error);
