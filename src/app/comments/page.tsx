@@ -11,8 +11,8 @@ export default async function Comments() {
       <h1 className="text-5xl font-extrabold">Posts</h1>
       {comments ? (
         comments.map((c) => (
-          <div key={c.id}>
-            <h2>{c.email}</h2>
+          <div className="min-w-80 max-w-80" key={c.id}>
+            <h2>👤{c.email}</h2>
             <p>{c.message}</p>
           </div>
         ))
