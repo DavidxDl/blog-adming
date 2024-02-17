@@ -23,8 +23,14 @@ export default async function Comments() {
   );
 }
 
-async function getComments():Promise<comment[]> {
-  const res = await fetch("/api/comments");
-  const data: comment[] =  await res.json() as comment[];
-  return data;
+async function getComments(): Promise<comment[]> {
+  try {
+    const res = await fetch("/api/comments");
+    if (!res.ok) throw new Error("couldnt fetch comments");
+    const data: comment[] = (await res.json()) as comment[];
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 }
