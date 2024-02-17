@@ -25,7 +25,7 @@ export default async function Comments() {
 
 async function getComments(): Promise<comment[]> {
   try {
-    const res = await fetch("/api/comments");
+    const res = await fetch("http://172.233.16.85/comments");
     if (!res.ok) throw new Error("couldnt fetch comments");
     const data: comment[] = (await res.json()) as comment[];
     return data;
