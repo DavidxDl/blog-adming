@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 interface data {
@@ -7,6 +8,7 @@ interface data {
 }
 
 export default function Home() {
+  const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -23,9 +25,12 @@ export default function Home() {
       if (!res.ok) {
         throw new Error("Wrong credentials");
       }
+      setUsername("");
+      setPassword("")
       const data: data = (await res.json()) as data;
       console.log(data);
       localStorage.setItem("token", data.acessToken);
+      router.push("/posts");
     } catch (error) {
       console.error(error);
       throw error;
