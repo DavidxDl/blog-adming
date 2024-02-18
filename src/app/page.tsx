@@ -13,7 +13,7 @@ export default function Home() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     try {
-      const res = await fetch("http://172.233.16.85/login", {
+      const res = await fetch("/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -25,7 +25,7 @@ export default function Home() {
       }
       const data: data = (await res.json()) as data;
       console.log(data);
-      localStorage.setItem("token", data.acessToken)
+      localStorage.setItem("token", data.acessToken);
     } catch (error) {
       console.error(error);
       throw error;
