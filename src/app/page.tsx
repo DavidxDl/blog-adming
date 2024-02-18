@@ -1,13 +1,65 @@
-export default async function Home() {
+"use client";
+
+import { useState } from "react";
+
+interface data {
+  acessToken: string;
+}
+
+export default function Home() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    try {
+      const res = await fetch("http://172.233.16.85/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username: username, password: password }),
+      });
+      if (!res.ok) {
+        throw new Error("Wrong credentials");
+      }
+      const data: data = (await res.json()) as data;
+      console.log(data);
+      localStorage.setItem("token", data.acessToken)
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
   return (
     <>
       <h1 className="text-5xl font-extrabold">Blog Admin</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="form-control">
-          <label className="text-xl">Admin Code</label>
+          <label className="text-xl" htmlFor="username">
+            Username:
+          </label>
+          <input
+            id="username"
+            name="username"
+            type="text"
+            value={username}
+            onChange={(e) => setUsername((user) => (user = e.target.value))}
+            required
+            className="valid:border-2 valid:border-green-500 valid:shadow-green-700  transition-transform p-1 bg-white w-full shadow-inner text-black shadow-black focus:scale-110"
+          />
+        </div>
+        <div className="form-control">
+          <label className="text-xl" htmlFor="password">
+            Password:
+          </label>
           <input
             type="password"
+            name="password"
+            id="password"
             required
+            value={password}
+            onChange={(e) => setPassword((pass) => (pass = e.target.value))}
             className="valid:border-2 valid:border-green-500 valid:shadow-green-700  transition-transform p-1 bg-white w-full shadow-inner text-black shadow-black focus:scale-110"
           />
         </div>

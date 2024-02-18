@@ -16,6 +16,7 @@ export default async function handler(
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": req.headers.authorization.split(" ")[1];
         },
         body: JSON.stringify(req.body),
         signal: controller.signal,

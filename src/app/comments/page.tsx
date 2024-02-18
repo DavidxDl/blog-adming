@@ -2,7 +2,7 @@ interface comment {
   email: string;
   message: string;
   timestamp: string;
-  id: string;
+  _id: string;
 }
 export default async function Comments() {
   const comments: comment[] = await getComments();
@@ -11,7 +11,7 @@ export default async function Comments() {
       <h1 className="text-5xl font-extrabold">Posts</h1>
       {comments ? (
         comments.map((c) => (
-          <div className="min-w-80 max-w-80" key={c.id}>
+          <div className="min-w-80 max-w-80" key={c._id}>
             <h2>👤{c.email}</h2>
             <p>{c.message}</p>
           </div>
