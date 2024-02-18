@@ -30,7 +30,7 @@ export default function Home() {
       const data: data = (await res.json()) as data;
       console.log(data);
       localStorage.setItem("token", data.acessToken);
-      router.push("/posts");
+      await router.push("/posts");
     } catch (error) {
       console.error(error);
       throw error;
