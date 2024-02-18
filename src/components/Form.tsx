@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface data {
   acessToken: string;
@@ -12,7 +12,9 @@ export default function Form() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  useEffect(() => {
   if(localStorage.getItem('token')) router.push('/posts');
+  },[router])
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
