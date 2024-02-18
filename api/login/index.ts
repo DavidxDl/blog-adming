@@ -22,7 +22,7 @@ export default async function handler(
       throw new Error("Wrong credentials");
     }
     const data: data = (await apiRes.json()) as data;
-    res.status(200).json({token: data.acessToken})
+    res.status(200).json({acessToken: data.acessToken})
   } catch (error) {
     console.error(error);
     throw error;
