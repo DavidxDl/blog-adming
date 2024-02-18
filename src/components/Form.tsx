@@ -12,7 +12,7 @@ export default function Form() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  if(localStorage.getItem('token')) return router.push('/posts');
+  if(localStorage.getItem('token')) router.push('/posts');
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
