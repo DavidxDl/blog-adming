@@ -1,6 +1,5 @@
 import Form from "~/components/Form";
 
-export default function Home() {
+export default async function home() {
   return <Form/>
-  
 }

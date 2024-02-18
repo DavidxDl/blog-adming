@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface data {
@@ -30,7 +30,7 @@ export default function Form() {
       const data: data = (await res.json()) as data;
       console.log(data);
       localStorage.setItem("token", data.acessToken);
-      await router.push("/posts");
+      router.push("/posts");
     } catch (error) {
       console.error(error);
       throw error;
